@@ -1,9 +1,7 @@
-"""
-Telegram-бот с чатом на базе Google Gemini API.
-Помнит историю диалога для каждого пользователя (пока бот запущен).
-
-Автор: сгенерировано помощью Claude
-"""
+# Telegram-бот с чатом на базе Google Gemini API.
+# Помнит историю диалога для каждого пользователя (пока бот запущен).
+#
+# Автор: сгенерировано с помощью Claude
 
 import os
 import logging
@@ -46,7 +44,7 @@ SYSTEM_PROMPT = (
 MODEL_NAME = "gemini-1.5-flash"
 MAX_HISTORY_MESSAGES = 20
 
-user_histories: dict[int, list] = {}
+user_histories = {}
 
 
 def get_model():
@@ -56,7 +54,7 @@ def get_model():
     )
 
 
-async def ask_gemini(user_id: int, user_message: str) -> str:
+async def ask_gemini(user_id, user_message):
     global _current_key_index
     history = user_histories.get(user_id, [])
 
@@ -84,9 +82,9 @@ async def ask_gemini(user_id: int, user_message: str) -> str:
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_histories.pop(update.effective_user.id, None)
     await update.message.reply_text(
-        "Привет! Я бот на базе Gemini. Просто пиши сообщение — отвечу.\n\n"
+        "Привет! Я бот на базе Gemini. Просто пиши сообщение - отвечу.\n\n"
         "Команды:\n"
-        "/reset — очистить историю диалога"
+        "/reset - очистить историю диалога"
     )
 
 
